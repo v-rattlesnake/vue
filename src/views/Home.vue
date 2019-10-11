@@ -24,7 +24,7 @@
       top
     },
     created(){
-      this.fetchCustomers()
+      // this.fetchCustomers()
     },
     methods:{
       fetchCustomers(){
@@ -44,6 +44,8 @@
             flex: 1;
             .content_con{
                 position: relative;
+                overflow: hidden;
+                height: 200px;
                 &::before{
                     content: "";
                     display: inline-block;
