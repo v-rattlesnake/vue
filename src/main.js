@@ -8,8 +8,11 @@ import "jquery"
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/Reset.css";
+import echarts from "echarts"
 
 Vue.config.productionTip = false;
+
+Vue.prototype.$echarts = echarts
 
 new Vue({
   router,

@@ -16,7 +16,7 @@
                     <i class="icon"></i>
                 </li>
             </ul>
-            <div class="publicTop_center col-6 row">
+            <div class="publicTop_center col-lg-7 d-xl-block row">
                 <p class="calendar">
                     <i class="icon"></i>
                     <span>2019&nbsp;/</span>
@@ -30,7 +30,7 @@
                     <span>00：</span>
                     <span>00</span>
                 </p>
-                <p class="col-6 weather">
+                <p class="weather">
                     <i class="icon"></i>
                     <span>历下</span>
                     <span>15℃</span>
@@ -63,7 +63,8 @@
         padding-top: 10px;
         color: #fff;
         .publicTop_left{
-            margin-left: 10px;
+            font-size: .12rem;
+            margin-left: 20px;
             width: 150px;
             height: 54px;
             display: flex;
@@ -110,9 +111,8 @@
             margin-top: 2px;
             line-height: 44px;
             border-radius: 22px;
+            display: none;
             background: rgba(0,0,0,.2);
-            display: flex;
-            justify-content: space-between;
             box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
             font-size: 14px;
             line-height: 14px;
@@ -126,6 +126,7 @@
                 flex: 9999999;
             }
             .calendar{
+                float: left;
                 padding-left: 15px;
                 span{
                     margin: 15px 0;
@@ -142,6 +143,7 @@
                 }
             }
             .time{
+                float: left;
                 padding: 0 15px;
                 i{
                     background-position: -120px 0;
@@ -158,6 +160,7 @@
                 }
             }
             .weather{
+                float: left;
                 padding: 0;
                 i{
                     background-position: -120px 0;
@@ -175,7 +178,8 @@
         }
         .user{
             float: right;
-            line-height: 50px;
+            line-height: .5rem;
+            font-size: .12rem;
             div{
                 display: inline-block;
                 span::after{

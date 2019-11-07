@@ -4,21 +4,24 @@
             <h1>不归途 <span>1.0.0</span></h1>
             <div @click="log"><span></span></div>
         </div>
-        <input type="text" placeholder="搜索菜单···">
+        <div class="input">
+            <i :style="tang?'left:18px;':'left:190px;'" :class="dark" @click="input"></i>
+            <input ref="input" type="text" placeholder="搜索菜单···" @blur.prevent="inputBlur" :style="{transform: 'translate('+translate+'px)',background:back,color:color}">
+        </div>
         <div :style="{'margin-top':top + 'px'}" :class="{menu:true,popup:!tang}">
             <ul>
                 <li v-show="tang">
                     <span>作品菜单</span>
                 </li>
                 <li>
-                    <i class="icon"></i>
+                    <i class="icon" :style="{left:leftI}"></i>
                     <span>QQ音乐</span>
-                    <span class="dis">QQ音乐</span>
+                    <span class="dis" v-show="!tang">QQ音乐</span>
                 </li>
                 <li>
-                    <i class="icon"></i>
+                    <i class="icon" :style="{left:leftI}"></i>
                     <span>小程序</span>
-                    <span class="dis">小程序</span>
+                    <span class="dis" v-show="!tang">小程序</span>
                 </li>
             </ul>
         </div>
@@ -28,14 +31,14 @@
                     <span>作品菜单</span>
                 </li>
                 <li>
-                    <i class="icon"></i>
+                    <i class="icon" :style="{left:leftI}"></i>
                     <span>QQ音乐</span>
-                    <span class="dis">QQ音乐</span>
+                    <span class="dis" v-show="!tang">QQ音乐</span>
                 </li>
                 <li>
-                    <i class="icon"></i>
+                    <i class="icon" :style="{left:leftI}"></i>
                     <span>小程序</span>
-                    <span class="dis">小程序</span>
+                    <span class="dis" v-show="!tang">小程序</span>
                 </li>
             </ul>
         </div>
@@ -44,42 +47,75 @@
 </template>
 
 <script>
-  export default {
-    name: "naveg",
-    props: {
-      msg: String
-    },
-    data: function() {
-      return {
-        left: 0,
-        top:10,
-        tang: true
-      };
-    },
-    methods: {
-      log() {
-        console.log(this.left);
-        if (this.tang) {
-          this.left = -200;
-          this.top = 0;
-          this.tang = false
-        }else {
-          this.left = 0;
-          this.top = 10;
-          this.tang = true
+    export default {
+        name: "naveg",
+        props: {
+        msg: String
+        },
+        data: function() {
+            return {
+                left: 0,
+                top:10,
+                tang: true,
+                leftI:"30px",
+                translate:0,
+                back:"rgba(0, 0, 0, .2)",
+                color:"#fff",
+                dark:"",
+            };
+        },
+        methods: {
+            log() {
+                if (this.tang) {
+                    this.left = -200;
+                    this.top = 0;
+                    this.tang = false
+                    this.leftI = "200px"
+                    this.back = 'rgba(0, 0, 0, .4)'
+                }else {
+                    this.left = 0;
+                    this.top = 10;
+                    this.tang = true
+                    this.leftI = "40px"
+                    this.back = 'rgba(0, 0, 0, .2)'
+                }
+            },
+            input(){
+                if(!this.tang){
+                    this.translate = 162
+                    this.back = "#fff"
+                    this.color = "#000"
+                    this.$refs.input.focus()
+                    this.dark = "dark"
+                }else{
+                    this.translate = 0
+                    this.back="rgba(0, 0, 0, .4)"
+                    this.color = "#fff"
+                    this.dark = ""
+                }
+            },
+            inputBlur(){
+                if(!this.tang){
+                    console.log(1)
+                    this.translate = 0
+                    this.back="rgba(0, 0, 0, .4)"
+                    this.color = "#fff"
+                    this.dark = ""
+                }
+            }
         }
-      }
-    }
-  };
+    };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
     .nav {
-        width: 240px;
+        transition-duration: .3s;
+        width: 250px;
         background: rgba(0, 0, 0, .2);
-        padding: 25px 0 0 10px;
+        padding: 25px 10px 0 10px;
         box-sizing: border-box;
+        display: block;
         .log {
             width: 100%;
             display: flex;
@@ -105,9 +141,10 @@
                 background: rgba(0, 0, 0, .2);
                 text-align: center;
                 cursor: pointer;
+                font-size: 0;
                 span {
                     line-height: 30px;
-                    font-size: 14px;
+                    font-size: .14rem;
                     color: #fff;
                     &::after {
                         content: "\2630";
@@ -115,32 +152,46 @@
                 }
             }
         }
-        input {
-            font-size: 13px;
+        .input{
+            position: relative;
+            font-size: 0;
             width: 100%;
-            background: rgba(0, 0, 0, .2) url("./../assets/search-white.png") no-repeat 30px center;
-            border-radius: 3px;
-            line-height: 38px;
-            border: 0;
-            outline: none;
-            padding-left: 80px;
-            margin-top: 13px;
-            color: #fff;
-            &::-webkit-input-placeholder {
-                /* WebKit browsers */
-                color: #d1d1d1;
+            i{
+                width: 40px;
+                height: 38px;
+                position: absolute;
+                background:url("./../assets/search-white.png") no-repeat center;
+                top: 13px;
+                z-index: 99
             }
-            &:-moz-placeholder {
-                /* Mozilla Firefox 4 to 18 */
-                color: #d1d1d1;
-            }
-            &::-moz-placeholder {
-                /* Mozilla Firefox 19+ */
-                color: #d1d1d1;
-            }
-            &::-ms-input-placeholder {
-                /* Internet Explorer 10+ */
-                color: #d1d1d1;
+            input {
+                font-size: .12rem;
+                width: 100%;
+                border-radius: 3px;
+                line-height: 38px;
+                border: 0;
+                position: relative;
+                outline: none;
+                z-index: 10;
+                padding-left: 70px;
+                margin-top: 13px;
+                transition-duration: .3s;
+                &::-webkit-input-placeholder {
+                    /* WebKit browsers */
+                    color: #d1d1d1;
+                }
+                &:-moz-placeholder {
+                    /* Mozilla Firefox 4 to 18 */
+                    color: #d1d1d1;
+                }
+                &::-moz-placeholder {
+                    /* Mozilla Firefox 19+ */
+                    color: #d1d1d1;
+                }
+                &::-ms-input-placeholder {
+                    /* Internet Explorer 10+ */
+                    color: #d1d1d1;
+                }
             }
         }
         .menu {
@@ -154,7 +205,7 @@
             li {
                 border-left: 2px solid transparent;
                 cursor: pointer;
-                padding-left: 80px;
+                padding-left:70px;
                 position: relative;
                 &:first-of-type {
                     padding: 6px 0 0 40px;
@@ -185,36 +236,31 @@
                     }
                     i {
                         position: absolute;
-                        top: 13px;
-                        left: 40px;
+                        top: 14px;
                     }
                 }
                 &:nth-of-type(3) i {
                     background-position: -20px 0;
                 }
                 &:hover .dis{
-                    animation: mymove 1s;
+                    transform: translate(78px);
+                    opacity: 1;
                 }
             }
             .dis{
-                /*display: none;*/
+                opacity: 0;
                 position: absolute;
                 top: 0;
-                left: 10px;
+                left: 150px;
                 padding: 0 10px;
                 border-radius: 0 3px 3px 0;
                 background: #000;
-            }
-        }
-        @keyframes mymove {
-            70%{
-                transform: translateX(260px);
-                display: block;
-            }
-            100%{
-                transform: translateX(240px);
+                transition-duration: .3s;
+                z-index: 9;
             }
         }
     }
-
+    .dark{
+        background-image: url("./../assets/search-dark.png")!important
+    }
 </style>
