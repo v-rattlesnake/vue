@@ -58,6 +58,10 @@
 
 <style scoped lang="less">
     .publicTop{
+        i{
+            position: relative;
+            top: 10px;
+        }
         height: 70px;
         background: rgba(0,0,0,.2);
         padding-top: 10px;
@@ -118,8 +122,8 @@
             line-height: 14px;
             i{
                 position: relative;
-                top: 6px;
                 margin-right: 4px;
+                top: 13px;
             }
             &::after{
                 content: "";
@@ -147,7 +151,6 @@
                 padding: 0 15px;
                 i{
                     background-position: -120px 0;
-                    top:7px;
                 }
                 span{
                     margin: 15px 0;
@@ -164,7 +167,6 @@
                 padding: 0;
                 i{
                     background-position: -120px 0;
-                    top:7px;
                 }
                 span{
                     margin: 15px 0;
@@ -207,7 +209,7 @@
             }
             i{
                 position: relative;
-                top: 6px;
+                top: 15px;
                 margin: 0 20px 0 10px;
                 background-position: -140px 0;
             }
