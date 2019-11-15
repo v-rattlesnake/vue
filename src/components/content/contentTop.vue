@@ -27,28 +27,28 @@
         width: 100%;
         display: flex;
         justify-content: space-around;
-        line-height: .6rem;
-        font-size: .16rem;
+        line-height: 5rem;
+        font-size: 1.6rem;
         border-bottom: 1px solid #ddd;
         color: #9EA7B3;
         p {
             flex: 1;
-            padding: 0 .2rem;
+            padding: 0 2rem;
             box-sizing: border-box;
             &:first-of-type {
-                padding-left: 1rem;
+                padding-left: 6%;
                 border-right: 1px dashed #CCC;
             }
             &:nth-of-type(2) {
                 flex: 3;
-                font-size: .12rem;
+                font-size: 1.2rem;
                 span {
                     float: right;
                     cursor: pointer;
                     display: block;
                     width: .4rem;
                     text-align: center;
-                    font-size: .16rem;
+                    font-size: 1.6rem;
                 }
             }
             &:last-of-type {

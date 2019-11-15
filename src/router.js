@@ -2,21 +2,31 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home";
 import QQmusic from "./views/QQmusic";
+import weixin from "./views/weixin";
+import uploading from "./views/uploading";
+import user from "./views/user";
 
 Vue.use(Router);
 
 const routes = [
   {
     path: "",
-    redirect: '/Home'
+    redirect: '/home'
   },{
     path: "/Home",
-    name: "Home",
     component: Home
   },{
     path:"/QQmusic",
-    name:"QQmusic",
     component: QQmusic
+  },{
+    path:"/weixin",
+    component: weixin
+  },{
+    path:"/uploading",
+    component: uploading
+  },{
+    path:"/user",
+    component: user
   }
 ]
 

@@ -28,7 +28,6 @@
 <style scoped lang="less">
     li {
         border-left: 2px solid transparent;
-        cursor: pointer;
         position: relative;
         padding: 0 0 0 40px;
         font-size: 12px;

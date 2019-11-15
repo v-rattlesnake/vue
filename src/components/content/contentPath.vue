@@ -3,8 +3,8 @@
         <p>
             <i class="icon"></i>
             <span> &gt;</span>
-            <router-link to="/home">
-                <span> 总览 </span>
+            <router-link :to="$store.state.url">
+                <span>&nbsp;{{$store.state.name}} </span>
             </router-link>
         </p>
     </div>
@@ -18,11 +18,12 @@
 
 <style scoped lang="less">
     .con_path {
-        line-height: .5rem;
-        font-size: .14rem;
+        line-height: 4rem;
+        font-size: 1.4rem;
         background: rgba(0, 0, 0, .02);
         width: 100%;
         padding-left: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         i {
             background-position: 0 -20px;
             position: relative;

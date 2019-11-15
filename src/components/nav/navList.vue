@@ -3,6 +3,7 @@
         <div class="listIcon" :style="{left:leftI}"><slot name="listIcon"></slot></div>
         <span><slot name="listNameBlock">默认名称</slot></span>
         <span class="dis" v-show="!tang"><slot name="listNameBlock">默认名称</slot></span>
+        <div class="listColl"><slot name="listColl"></slot></div>
     </li>
 </template>
 
@@ -25,10 +26,13 @@
         border-left: 2px solid transparent;
         cursor: pointer;
         padding-left: 70px;
-        position: relative;
+        position: absolute;
         color: #FFFFFF;
+        width: 230px;
+        height: 45px;
+        left: 0;
         &:hover {
-            background: rgba(0, 0, 0, .5);
+            background: #bcbcbc;
             border-left-color: #fff;
             &::after {
                 content: "";
@@ -56,6 +60,16 @@
         &:hover .dis {
             transform: translate(128px);
             opacity: 1;
+        }
+        .listColl{
+            height: 100%;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            right: 10px;
+            top: 0;
         }
     }
 

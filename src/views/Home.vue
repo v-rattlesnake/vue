@@ -2,23 +2,16 @@
     <div class="container-fluid dashboard">
         <div class="row">
             <div class="col-6">
-                <!--<p></p>-->
-                <!--<ul>-->
-                    <!--<li data-tab="0" @click="tab" :class="tang?'pitch':''">最近7天</li>-->
-                    <!--<li data-tab="1" @click="tab" :class="!tang?'pitch':''">最近30天</li>-->
-                <!--</ul>-->
-                <div ref="zhuce" id="zhuce" style="width:100%;height: 4rem;"></div>
+                <div ref="zhuce" id="zhuce" style="width:100%;height: 33rem;"></div>
             </div>
             <div class="col-6">
-                <p>用户数量 / 音乐数量（总数）</p>
-                <div id="users" style="width:100%;height:4rem"></div>
+                <div id="users" style="width:100%;height:33rem"></div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-  import echarts from "echarts"
   export default {
     name: "cont",
     components:{
@@ -26,26 +19,30 @@
     data(){
       return {
         tang:true,
-        width:''
+        width:'',
+        zhuce:"",
+        users:""
       }
     },
     mounted(){
-      this.drawLine(),
-      window.onresize = () => {
-        return (() => {
-          this.width = this.$refs.zhuce.clientWidth;
-        })();
+      this.drawLine();
+      window.onresize = (e) => {
+        return ((e) => {
+          this.size();
+          if (e.target.innerWidth < 768 && this.$parent.$children[0].tang) {
+            this.$parent.$children[0].log()
+          };
+        })(e);
       }
     },
     methods:{
       drawLine(){
         // 基于准备好的dom，初始化echarts实例
-        let zhuce = echarts.init(document.getElementById('zhuce'),{width: this.width,})
-        let users = echarts.init(document.getElementById('users'))
+        this.zhuce = this.$echarts.init(document.getElementById('zhuce'),{width: this.width,})
+        this.users = this.$echarts.init(document.getElementById('users'))
         // 绘制图表
-        zhuce.hideLoading();
+        this.zhuce.hideLoading();
         let option = {
-          baseOption:{
             title: {
               text: '数据访问次数 / 用户注册量（日）',
               textStyle: {
@@ -131,27 +128,8 @@
               },
             },
               {
-                type: "value",
-                name: "同比",
-                nameTextStyle: {
-                  color: "#ebf8ac"
-                },
-                position: "right",
                 splitLine: {
                   show: false
-                },
-                axisTick: {
-                  show: false
-                },
-                axisLine: {
-                  show: false
-                },
-                axisLabel: {
-                  show: true,
-                  formatter: "{value} %", //右侧Y轴文字显示
-                  textStyle: {
-                    color: "#ebf8ac"
-                  }
                 }
               },
               {
@@ -206,7 +184,7 @@
                 barWidth: 15,
                 itemStyle: {
                   normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                       offset: 0,
                       color: "#00FFE3"
                     },
@@ -220,78 +198,20 @@
                 data: [4.2, 3.8, 4.8, 3.5, 2.9, 2.8, 3, 5]
               }
             ]
+          };
+        this.zhuce.setOption(option);
+        this.users.setOption({
+          title: {
+            text: '用户数量 / 音乐数量（总数）',
+            textStyle: {
+              align: 'center',
+              color: '#fff',
+              fontSize: 20,
+            },
+            top: '3%',
+            left: '10%',
           },
-          media:[
-            {
-              option: {},
-            },
-            {
-              query: {
-                minAspectRatio: 1
-              },
-              option: {
-                legend: {
-                  orient: 'horizontal'
-                },
-                series: [
-                  {
-                    radius: [20, '50%'],
-                    center: ['25%', '50%']
-                  },
-                  {
-                    radius: [30, '50%'],
-                    center: ['75%', '50%']
-                  }
-                ]
-              }
-            },
-            {
-              query: {
-                maxAspectRatio: 1
-              },
-              option: {
-                legend: {
-                  right: 'center',
-                  bottom: 0,
-                  orient: 'horizontal'
-                },
-                series: [
-                  {
-                    radius: [20, '50%'],
-                    center: ['50%', '30%']
-                  },
-                  {
-                    radius: [30, '50%'],
-                    center: ['50%', '70%']
-                  }
-                ]
-              }
-            },
-            {
-              query: {
-                maxWidth: 500
-              },
-              option: {
-                legend: {
-                  right: 10,
-                  top: '15%',
-                  orient: 'vertical'
-                },
-                series: [
-                  {
-                    radius: [20, '50%'],
-                    center: ['50%', '30%']
-                  },
-                  {
-                    radius: [30, '50%'],
-                    center: ['50%', '75%']
-                  }
-                ]
-              }
-            }
-          ]};
-        zhuce.setOption({option});
-        users.setOption({
+          backgroundColor: '#0f375f',
           tooltip: {
             trigger : "axis",
             axisPointer :{
@@ -303,9 +223,46 @@
           },
           xAxis: {
             type:"category",
-            data: ["用户数量","音乐数量"]
+            data: ["用户数量","音乐数量"],
+            axisLine: {
+              show: true, //隐藏X轴轴线
+              lineStyle: {
+                color: '#01FCE3'
+              }
+            },
+            axisTick: {
+              show: true //隐藏X轴刻度
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#ebf8ac" //X轴文字颜色
+              }
+            },
           },
-          yAxis: {},
+          yAxis: {
+            nameTextStyle: {
+              color: "#ebf8ac"
+            },
+            splitLine: {
+              show: false
+            },
+            axisTick: {
+              show: true
+            },
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#FFFFFF'
+              }
+            },
+            axisLabel: {
+              show: true,
+              textStyle: {
+                color: "#ebf8ac"
+              }
+            },
+          },
           series: [{
             name: '数量',
             type: 'bar',
@@ -313,12 +270,10 @@
           }]
         });
       },
-      tab(e){
-        if(e.target.dataset.tab == 1){
-          this.tang = false
-        }else{
-          this.tang = true
-        }
+      size(){
+        console.log(1);
+        this.zhuce.resize();
+        this.users.resize();
       }
     }
   };
