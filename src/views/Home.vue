@@ -297,4 +297,5 @@
     .homeCon .col-12{
         margin-top: 15px;
     }
+
 </style>

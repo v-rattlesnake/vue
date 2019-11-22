@@ -23,3 +23,6 @@ i.icon{
     background: url("./spirit.png") no-repeat 0 0;
     vertical-align: top;
 }
+.__view{
+    width: 100% !important;
+}
