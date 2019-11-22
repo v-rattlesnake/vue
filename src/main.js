@@ -3,6 +3,9 @@ import './plugins/axios'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import vuescroll from 'vuescroll';
+
+Vue.use(vuescroll)
 
 import echarts from "echarts"
 

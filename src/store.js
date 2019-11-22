@@ -5,9 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    name:"总览",
-    url:"/home"
+    name: "总览",
+    url: "/home",
+    tang: true
   },
-  mutations: {},
+  mutations: {
+    increment (state,bl) {
+      // 变更状态
+      state.tang = bl
+    }
+  },
   actions: {}
 });

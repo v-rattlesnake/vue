@@ -1,8 +1,8 @@
 <template>
     <li>
-        <div class="listIcon" :style="{left:leftI}"><slot name="listIcon"></slot></div>
+        <div :class="['listIcon' , ($store.state.tang? '':'listIconTang')]"><slot name="listIcon"></slot></div>
         <span><slot name="listNameBlock">默认名称</slot></span>
-        <span class="dis" v-show="!tang"><slot name="listNameBlock">默认名称</slot></span>
+        <span class="dis" v-show="!$store.state.tang"><slot name="listNameBlock">默认名称</slot></span>
         <div class="listColl"><slot name="listColl"></slot></div>
     </li>
 </template>
@@ -10,13 +10,9 @@
 <script>
   export default {
     name: "navList",
+    props:{
+    },
     computed: {
-      tang() {
-        return this.$parent.$parent.tang;
-      },
-      leftI() {
-        return this.$parent.$parent.leftI;
-      }
     }
   };
 </script>
@@ -28,7 +24,7 @@
         padding-left: 70px;
         position: absolute;
         color: #FFFFFF;
-        width: 230px;
+        width: 100%;
         height: 45px;
         left: 0;
         &:hover {
@@ -58,7 +54,7 @@
             background-position: -20px 0;
         }
         &:hover .dis {
-            transform: translate(128px);
+            transform: translate(138px);
             opacity: 1;
         }
         .listColl{
@@ -70,6 +66,9 @@
             position: absolute;
             right: 10px;
             top: 0;
+        }
+        .listIconTang{
+            left: 205px;
         }
     }
 
@@ -84,4 +83,6 @@
         transition-duration: .3s;
         z-index: 9;
     }
+
+
 </style>

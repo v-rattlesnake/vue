@@ -1,8 +1,8 @@
 <template>
     <div class="con_top">
-        <p><slot name="contentName">默认</slot></p>
-        <p :style="{opacity:opacity}">欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 <span @click="opacitying">×</span></p>
-        <p class="col d-xl-block"><slot name="contentNAN">虚位以待</slot></p>
+        <p class="col-3"><slot name="contentName">默认</slot></p>
+        <div class="col-xl-6 col-9" :style="{opacity:opacity}"><p>欢迎回来，不归途！你的最后一次登陆在昨天，下午16欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 :54 </p><span @click="opacitying">×</span></div>
+        <p class="d-xl-block col-3"><slot name="contentNAN">虚位以待</slot></p>
     </div>
 </template>
 
@@ -32,28 +32,39 @@
         border-bottom: 1px solid #ddd;
         color: #9EA7B3;
         p {
-            flex: 1;
-            padding: 0 2rem;
+            padding: 0 1rem;
             box-sizing: border-box;
             &:first-of-type {
-                padding-left: 6%;
+                padding-left: 60px;
                 border-right: 1px dashed #CCC;
-            }
-            &:nth-of-type(2) {
-                flex: 3;
-                font-size: 1.2rem;
-                span {
-                    float: right;
-                    cursor: pointer;
-                    display: block;
-                    width: .4rem;
-                    text-align: center;
-                    font-size: 1.6rem;
-                }
             }
             &:last-of-type {
                 display: none;
                 border-left: 1px dashed #CCc;
+            }
+        }
+        div{
+            font-size: 1.2rem;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            p:first-of-type{
+                display: inline-block;
+                vertical-align: top;
+                width: 90%;
+                max-width: 90%;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                border: 0;
+                padding: 0;
+            }
+            span {
+                float: right;
+                cursor: pointer;
+                display: block;
+                width: 2rem;
+                text-align: center;
+                font-size: 1.6rem;
             }
         }
     }

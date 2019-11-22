@@ -3,11 +3,16 @@
         <div class="home">
             <naveg msg="Welcome to Your Vue.js App"/>
             <div class="content">
-                <top></top>
+                <top @publicTop="getHeight"></top>
+                <collapse></collapse>
                 <content-t></content-t>
-                <keep-alive>
-                    <router-view></router-view>
-                </keep-alive>
+                <div class="scroll" :style="{height:height}">
+                    <vue-scroll :ops="ops">
+                        <keep-alive>
+                            <router-view></router-view>
+                        </keep-alive>
+                    </vue-scroll>
+                </div>
             </div>
         </div>
     </div>
@@ -17,16 +22,25 @@
   import naveg from "./components/nav/nav";
   import top from "./components/top";
   import contentT from "./components/content/content";
+  import collapse from "./components/publicTopCollapse";
 
     export default {
       name:"App",
       components:{
         naveg,
         top,
-        contentT
+        contentT,
+        collapse
       },
       data(){
-        return {}
+        return {
+          ops:{
+            bar:{
+              background:"rgba(0,0,0,.2)"
+            }
+          },
+          height: "calc(100vh - 180px)"
+        }
       },
       created(){
         // this.fetchCustomers()
@@ -38,6 +52,10 @@
               console.log(res)
             })
         },
+        getHeight(res){
+          console.log(res);
+          this.height = res
+        }
       }
     }
 </script>
@@ -53,7 +71,11 @@
         display: flex;
         justify-content: space-between;
         .content {
+            width: 50%;
             flex: 1;
+            .scroll{
+                background: #f5f5f5;
+            }
             .dashboard{
                 font-size: .14rem;
                 padding-top: 20px;

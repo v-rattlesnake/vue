@@ -11,28 +11,28 @@ Vue.use(Router);
 const routes = [
   {
     path: "",
-    redirect: '/home'
-  },{
+    redirect: "/home"
+  }, {
     path: "/Home",
     component: Home
-  },{
-    path:"/QQmusic",
+  }, {
+    path: "/QQmusic",
     component: QQmusic
-  },{
-    path:"/weixin",
+  }, {
+    path: "/weixin",
     component: weixin
-  },{
-    path:"/uploading",
+  }, {
+    path: "/uploading",
     component: uploading
-  },{
-    path:"/user",
+  }, {
+    path: "/user",
     component: user
   }
-]
+];
 
 export default new Router({
   routes,
-  mode:"history",
+  mode: "history"
 });
 
 // [

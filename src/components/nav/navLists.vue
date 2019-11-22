@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li v-show="tang">
+            <li class="title" v-show="$store.state.tang">
                 <span><slot name="listTitle">菜单列表</slot></span>
             </li>
             <slot name="lists"></slot>
@@ -12,15 +12,10 @@
 <script>
   export default {
     name: "navLists",
-    props: {},
+    props: {
+    },
     component: {},
     computed: {
-      tang() {
-        return this.$parent.tang;
-      },
-      leftI() {
-        return this.$parent.leftI;
-      }
     }
   };
 </script>
@@ -40,5 +35,15 @@
         }
     }
 
+    @media (min-width: 768px) {
+        /*.title{*/
+            /*display: block;*/
+        /*}*/
+    }
+    @media (max-width: 767px) {
+        .title{
+            display: none;
+        }
+    }
 
 </style>

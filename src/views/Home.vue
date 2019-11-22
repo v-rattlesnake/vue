@@ -1,10 +1,10 @@
 <template>
-    <div class="container-fluid dashboard">
+    <div class="container-fluid homeCon">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <div ref="zhuce" id="zhuce" style="width:100%;height: 33rem;"></div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
                 <div id="users" style="width:100%;height:33rem"></div>
             </div>
         </div>
@@ -12,27 +12,18 @@
 </template>
 
 <script>
+  import store from "../store";
+
   export default {
     name: "cont",
     components:{
     },
     data(){
       return {
-        tang:true,
         width:'',
         zhuce:"",
-        users:""
-      }
-    },
-    mounted(){
-      this.drawLine();
-      window.onresize = (e) => {
-        return ((e) => {
-          this.size();
-          if (e.target.innerWidth < 768 && this.$parent.$children[0].tang) {
-            this.$parent.$children[0].log()
-          };
-        })(e);
+        users:"",
+        sizeOnce:true
       }
     },
     methods:{
@@ -271,34 +262,39 @@
         });
       },
       size(){
-        console.log(1);
         this.zhuce.resize();
         this.users.resize();
+      },
+      inc(){
+        console.log(1);
+        store.commit("increment",true);
+        // this.sizeOnce = false
       }
+    },
+    mounted(){
+      this.$nextTick(function() {
+        this.drawLine();
+        if (window.innerWidth < 768 && store.state.tang) {
+          store.commit("increment",false);
+          this.sizeOnce = true
+        };
+        window.onresize = (e) => {
+          if (e.target.innerWidth < 768 && store.state.tang){
+            store.commit("increment",false)
+          } else if (e.target.innerWidth >= 768 && !store.state.tang && this.sizeOnce) {
+            this.inc()
+          }
+          return (() => {
+            this.size();
+          })();
+        };
+      })
     }
   };
 </script>
 
 <style scoped lang="less">
-    .content_con{
-        background: #f5f5f5;
-        position: relative;
-        overflow: hidden;
-        &::before{
-            content: "";
-            display: inline-block;
-            border-width: 0 42px 42px 0;
-            border-style: solid;
-            border-color: rgba(0,0,0,.2) #fff;
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            transform: rotate(90deg);
-            position: absolute;
-            top: 0;
-            left: 0;
-            box-shadow: 0 0 0 rgba(0, 0, 0, 0.4), 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+    .homeCon .col-12{
+        margin-top: 15px;
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid publicTop">
         <div class="row">
-            <ul class="publicTop_left">
+            <ul class="publicTop_left d-md-flex d-none">
                 <li>
                     <i class="icon">
                         <span>99+</span>
@@ -39,12 +39,13 @@
             </div>
             <div class="null"></div>
             <div class="user">
-                <div>
+                <div class="d-md-inline-block d-none">
                     <img src="" alt="">
                     <span class="userName">不归途</span>
                 </div>
-                <span>设置</span>
+                <span class="d-md-inline-block d-none">设置</span>
                 <i class="icon"></i>
+                <span @click="collapse" class="navTop d-md-none md_log" data-toggle="collapse" aria-expanded="false" data-target="#publicTop"></span>
             </div>
         </div>
     </div>
@@ -52,7 +53,26 @@
 
 <script>
   export default {
-    name: "top"
+    name: "top",
+    data(){
+      return{
+        setHeight:true
+      }
+    },
+    methods:{
+      collapse(){
+        if (this.setHeight) {
+          this.$emit("publicTop","calc(100vh - 340px)");
+          this.setHeight = !this.setHeight
+        } else {
+          setTimeout(() => {
+            this.$emit("publicTop","calc(100vh - 180px)");
+          },350)
+          this.setHeight = !this.setHeight
+        };
+
+      }
+    }
   };
 </script>
 
@@ -66,6 +86,7 @@
         background: rgba(0,0,0,.2);
         padding-top: 10px;
         color: #fff;
+        position: relative;
         .publicTop_left{
             font-size: .12rem;
             margin-left: 20px;
@@ -212,6 +233,17 @@
                 top: 15px;
                 margin: 0 20px 0 10px;
                 background-position: -140px 0;
+            }
+            .navTop{
+                line-height: 30px;
+                font-size: 2.2rem;
+                color: #fff;
+                position: relative;
+                top: 8px;
+                margin: 0 20px 0 0;
+                &::after {
+                    content: "\2630";
+                }
             }
         }
     }

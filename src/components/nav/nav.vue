@@ -1,70 +1,80 @@
 <template>
-    <div class="nav" :style="{'margin-left':left+'px'}">
-        <div class="log">
-            <nav-log></nav-log>
-            <div ref="log" @click="log" :tang="tang"><span></span></div>
-        </div>
-        <div class="input">
-            <i :style="tang?'left:18px;':'left:190px;'" :class="dark" @click="input"></i>
-            <input ref="input" type="text" placeholder="搜索菜单···"
-                   @blur.prevent="inputBlur"
-                   :style="{transform: 'translate('+translate+'px)',background:back,color:color}">
-        </div>
-        <div :style="{'margin-top':top + 'px'}" :class="{menu:true,popup:!tang}">
-            <nav-lists>
-                <template v-slot:listTitle="listTitle">作品列表</template>
-                <template v-slot:lists="lists">
-                    <a @click="collapse" data-toggle="collapse" aria-expanded="false" data-target="#collapseExample1">
-                        <nav-list>
-                            <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
-                            <template v-slot:listNameBlock="listNameBlock">QQmusic</template>
-                            <template v-slot:listColl="listColl"><i :class="['collapse_icon' ,(collapse_?'':'collapse_iconPitch')]"></i></template>
-                        </nav-list>
-                    </a>
-                    <div class="coll collapse" id="collapseExample1">
-                        <router-link to="/QQmusic" active-class>
-                            <nav-list>
-                                <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
-                                <template v-slot:listNameBlock="listNameBlock">管理</template>
-                            </nav-list>
-                        </router-link>
-                        <router-link to="/uploading" active-class>
-                            <nav-list>
-                                <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
-                                <template v-slot:listNameBlock="listNameBlock">上传</template>
-                            </nav-list>
-                        </router-link>
-                    </div>
-                    <router-link to="/weixin" active-class>
-                        <nav-list>
-                            <template v-slot:listIcon="listIcon"><i class="icon weixin"></i></template>
-                            <template v-slot:listNameBlock="listNameBlock">微信小程序</template>
-                        </nav-list>
-                    </router-link>
-                </template>
-            </nav-lists>
-        </div>
-        <div :style="{'margin-top':top + 'px'}" :class="{menu:true,popup:!tang}">
-            <nav-lists>
-                <template v-slot:listTitle="listTitle">用户</template>
-                <template v-slot:lists="lists">
-                    <a @click="collapse_1 = !collapse_1" data-toggle="collapse" aria-expanded="false" data-target="#collapseExample2">
-                        <nav-list>
-                            <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
-                            <template v-slot:listNameBlock="listNameBlock">用户管理</template>
-                            <template v-slot:listColl="listColl"><i :class="['collapse_icon' ,(collapse_1?'':'collapse_iconPitch')]"></i></template>
-                        </nav-list>
-                    </a>
-                    <div class="coll collapse" id="collapseExample2">
-                        <router-link to="/user" active-class>
-                            <nav-list>
-                                <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
-                                <template v-slot:listNameBlock="listNameBlock">用户权限</template>
-                            </nav-list>
-                        </router-link>
-                    </div>
-                </template>
-            </nav-lists>
+    <div :class="['nav',($store.state.tang? '':'navMD')]">
+        <div class="">
+            <div class="log">
+                <nav-log>
+                    <template class="" v-slot:log="log">不归途 </template>
+                </nav-log>
+                <div class="d-md-block d-none" ref="log" @click="log"><span></span></div>
+            </div>
+            <div :class="['input', dark]">
+                <i @click="input()"></i>
+                <input ref="input" type="text" placeholder="搜索菜单···"
+                       @blur.prevent="inputBlur"
+                       :style="['transform: translate('+translate+'px)','color:'+color,($store.state.tang? '':'background:'+back)]">
+            </div>
+            <div :class="{scroll:$store.state.tang}">
+                <div :class="{menu:true,popup:!$store.state.tang}">
+                    <nav-lists>
+                        <template v-slot:listTitle="listTitle">作品列表</template>
+                        <template v-slot:lists="lists">
+                            <a @click="collapse" data-toggle="collapse" aria-expanded="false" data-target="#collapseExample1">
+                                <nav-list>
+                                    <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
+                                    <template v-slot:listNameBlock="listNameBlock">QQmusic</template>
+                                    <template v-slot:listColl="listColl">
+                                        <i :class="['collapse_icon',(collapse_?'':'collapse_iconPitch')]" v-if="$store.state.tang"></i>
+                                    </template>
+                                </nav-list>
+                            </a>
+                            <div class="coll collapse" id="collapseExample1">
+                                <router-link to="/QQmusic" active-class>
+                                    <nav-list>
+                                        <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
+                                        <template v-slot:listNameBlock="listNameBlock">管理</template>
+                                    </nav-list>
+                                </router-link>
+                                <router-link to="/uploading" active-class>
+                                    <nav-list>
+                                        <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
+                                        <template v-slot:listNameBlock="listNameBlock">上传</template>
+                                    </nav-list>
+                                </router-link>
+                            </div>
+                            <router-link to="/weixin" active-class>
+                                <nav-list>
+                                    <template v-slot:listIcon="listIcon"><i class="icon weixin"></i></template>
+                                    <template v-slot:listNameBlock="listNameBlock">微信小程序</template>
+                                </nav-list>
+                            </router-link>
+                        </template>
+                    </nav-lists>
+                </div>
+                <div  :class="{menu:true,popup:!$store.state.tang}">
+                    <nav-lists>
+                        <template v-slot:listTitle="listTitle">用户</template>
+                        <template v-slot:lists="lists">
+                            <a @click="collapse_1 = !collapse_1" data-toggle="collapse" aria-expanded="false" data-target="#collapseExample2">
+                                <nav-list>
+                                    <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
+                                    <template v-slot:listNameBlock="listNameBlock">用户管理</template>
+                                    <template v-slot:listColl="listColl">
+                                        <i :class="['collapse_icon' ,(collapse_1?'':'collapse_iconPitch')]" v-if="$store.state.tang"></i>
+                                    </template>
+                                </nav-list>
+                            </a>
+                            <div class="coll collapse" id="collapseExample2">
+                                <router-link to="/user" active-class>
+                                    <nav-list>
+                                        <template v-slot:listIcon="listIcon"><i class="icon music"></i></template>
+                                        <template v-slot:listNameBlock="listNameBlock">用户权限</template>
+                                    </nav-list>
+                                </router-link>
+                            </div>
+                        </template>
+                    </nav-lists>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -73,6 +83,7 @@
   import navLog from "./navLog";
   import navLists from "./navLists"
   import navList from "./navList"
+  import store from "../../store";
 
   export default {
     name: "naveg",
@@ -86,10 +97,6 @@
     },
     data() {
       return {
-        left: 0,
-        top: 10,
-        tang: true,
-        leftI: "30px",
         translate: 0,
         back: "rgba(0, 0, 0, .2)",
         color: "#fff",
@@ -101,42 +108,22 @@
     mounted(){},
     methods: {
       log() {
-        console.log(this.$parent.$children[3]);
-        if (this.tang) {
-          this.left = -200;
-          this.top = 0;
-          this.tang = false;
-          this.leftI = "200px";
-          this.back = "rgba(0, 0, 0, .4)";
-        } else {
-          this.left = 0;
-          this.top = 10;
-          this.tang = true;
-          this.leftI = "40px";
-          this.back = "rgba(0, 0, 0, .2)";
-        }
-        setTimeout(this.$parent.$children[3].size,301)
+        // console.log(this.$parent.$children[3]);
+        store.commit("increment",!store.state.tang);
+        setTimeout(this.$parent.$children[3].size,302)
       },
       input() {
-        if (!this.tang) {
-          this.translate = 162;
-          this.back = "#fff";
-          this.color = "#000";
+        console.log(1);
+        if (!store.state.tang) {
           this.$refs.input.focus();
           this.dark = "dark";
         } else {
-          this.translate = 0;
-          this.back = "rgba(0, 0, 0, .4)";
-          this.color = "#fff";
           this.dark = "";
         }
       },
       inputBlur() {
-        if (!this.tang) {
+        if (!store.state.tang) {
           console.log(1);
-          this.translate = 0;
-          this.back = "rgba(0, 0, 0, .4)";
-          this.color = "#fff";
           this.dark = "";
         }
       },
@@ -157,10 +144,12 @@
         padding: 25px 10px 0 10px;
         box-sizing: border-box;
         display: block;
+        position: relative;
         .log {
             width: 100%;
             display: flex;
             justify-content: space-between;
+            margin-bottom: 2px;
             span {
                 display: inline-block;
             }
@@ -187,7 +176,7 @@
             font-size: 0;
             width: 100%;
             i {
-                width: 40px;
+                width: 50px;
                 height: 38px;
                 position: absolute;
                 background: url("./../../assets/search-white.png") no-repeat center;
@@ -206,6 +195,7 @@
                 padding-left: 70px;
                 margin-top: 13px;
                 transition-duration: .3s;
+                background: rgba(0,0,0,.2);
                 &::-webkit-input-placeholder {
                     /* WebKit browsers */
                     color: #d1d1d1;
@@ -224,6 +214,10 @@
                 }
             }
         }
+        .scroll{
+            height: calc(100vh - 126px);
+            margin-top: 10px;
+        }
         .menu {
             width: 100%;
             border-radius: 3px;
@@ -231,7 +225,6 @@
             color: #FFF;
             line-height: 45px;
             font-size: 13px;
-            margin-top: 10px;
             .music{
                 background-position: 0 0 ;
             }
@@ -276,9 +269,50 @@
                 background: rgba(0,0,0,.25);
             }
         }
+        div .dark {
+            i{
+                background-image: url("./../../assets/search-dark.png")
+            }
+            input{
+                background: #fff;
+                color: #000;
+                transform: translate(170px);
+            }
+        }
+    }
+    .navMD{
+        margin-left: -200px;
+        padding-right: 0;
+        .log div{
+            margin-right: 10px;
+        }
+        .input{
+            i{
+                left: 190px;
+            }
+            input{
+                border-radius: 0;
+                background: rgba(0,0,0,.4);
+            }
+        }
+        .scroll{
+            margin-top: 0;
+            .menu{
+                border-radius: 0;
+                .listIcon{
+                    left: 200px;
+                }
+            }
+        }
     }
 
-    .dark {
-        background-image: url("./../../assets/search-dark.png") !important
+    @media (max-width: 767px) {
+        .nav{
+            .navMD;
+            .log{
+                margin-left: 200px;
+                transition: 500ms;
+            }
+        }
     }
 </style>
