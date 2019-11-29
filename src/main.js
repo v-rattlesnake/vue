@@ -1,21 +1,24 @@
 import Vue from "vue";
-import './plugins/axios'
+import axios from 'axios'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuescroll from 'vuescroll';
 
-Vue.use(vuescroll)
+import animate from 'animate.css'
 
-import echarts from "echarts"
+Vue.use(vuescroll, animate);
 
-import "jquery"
+import echarts from "echarts";
+
+import "jquery";
 import "bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap-grid.min.css";
 import "./assets/Reset.css";
 
 Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;
+Vue.prototype.$axios = axios;
 
 
 new Vue({

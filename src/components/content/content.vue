@@ -24,16 +24,20 @@
 
 <style scoped lang="less">
     .content_con{
-        background: #f5f5f5;
+        background: -webkit-linear-gradient(-45deg, transparent 30px, #f5f5f5 30px),
+        -webkit-linear-gradient(135deg, #f5f5f5 30px, transparent 30px),
+        -webkit-linear-gradient(315deg, transparent 30px, #f5f5f5 30px),
+        -webkit-linear-gradient(315deg, transparent 30px, #f5f5f5 30px);;
         position: relative;
         overflow: hidden;
         padding: 0;
+        z-index: -1;
         &::before{
             content: "";
             display: inline-block;
             border-width: 0 42px 42px 0;
             border-style: solid;
-            border-color: rgba(0,0,0,.34) #fff;
+            border-color: rgba(0,0,0,.36) #fff;
             -webkit-transform: rotate(90deg);
             -moz-transform: rotate(90deg);
             -ms-transform: rotate(90deg);

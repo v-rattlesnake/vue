@@ -1,7 +1,7 @@
 <template>
     <div class="con_top">
-        <p class="col-3"><slot name="contentName">默认</slot></p>
-        <div class="col-xl-6 col-9" :style="{opacity:opacity}"><p>欢迎回来，不归途！你的最后一次登陆在昨天，下午16欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 :54 </p><span @click="opacitying">×</span></div>
+        <p class="col-sm-3 col-12"><slot name="contentName">默认</slot></p>
+        <div class="col-xl-6 col-sm-9 col-12" :style="{opacity:opacity}"><p>欢迎回来，不归途！你的最后一次登陆在昨天，下午16欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 欢迎回来，不归途！你的最后一次登陆在昨天，下午16:54 :54 </p><span @click="opacitying">×</span></div>
         <p class="d-xl-block col-3"><slot name="contentNAN">虚位以待</slot></p>
     </div>
 </template>
@@ -32,7 +32,7 @@
         border-bottom: 1px solid #ddd;
         color: #9EA7B3;
         p {
-            padding: 0 1rem;
+            padding: 0;
             box-sizing: border-box;
             &:first-of-type {
                 padding-left: 60px;
@@ -45,12 +45,12 @@
         }
         div{
             font-size: 1.2rem;
-            padding: 0 1rem;
+            padding: 0 10px;
             box-sizing: border-box;
             p:first-of-type{
                 display: inline-block;
                 vertical-align: top;
-                width: 90%;
+                width: 88%;
                 max-width: 90%;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -65,6 +65,15 @@
                 width: 2rem;
                 text-align: center;
                 font-size: 1.6rem;
+            }
+        }
+    }
+    @media (max-width: 575px) {
+        .con_top{
+            line-height: 2.5rem;
+            display: block;
+            div{
+                padding-left: 60px;
             }
         }
     }

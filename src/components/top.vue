@@ -39,39 +39,56 @@
             </div>
             <div class="null"></div>
             <div class="user">
-                <div class="d-md-inline-block d-none">
+                <button class="d-md-inline-flex d-none" @click="pullDowning">
                     <img src="" alt="">
                     <span class="userName">不归途</span>
-                </div>
+                    <pull-down-list :none="none" :style-z="'bottom:0;transform:translate(0,calc(100% + 10px));width:100%'"></pull-down-list>
+                </button>
                 <span class="d-md-inline-block d-none">设置</span>
                 <i class="icon"></i>
-                <span @click="collapse" class="navTop d-md-none md_log" data-toggle="collapse" aria-expanded="false" data-target="#publicTop"></span>
+                <span @click="collapse" class="navTop d-md-none md_log"></span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+  import pullDownList from "./AppComponents/pullDownList"
+  import store from "../store";
+
   export default {
     name: "top",
+    components:{
+      pullDownList
+    },
+    props:{},
     data(){
       return{
-        setHeight:true
+        none:false,
+        setHeight1:true
       }
     },
+    computed:{},
     methods:{
       collapse(){
-        if (this.setHeight) {
-          this.$emit("publicTop","calc(100vh - 340px)");
-          this.setHeight = !this.setHeight
+        // console.log(e.target.attributes["aria-expanded"].value==="true");
+        this.none = false;
+        if (this.setHeight1) {
+          this.$emit("publicTop","calc(100vh - 360px)");
+          this.setHeight1 = !this.setHeight1
         } else {
           setTimeout(() => {
             this.$emit("publicTop","calc(100vh - 180px)");
-          },350)
-          this.setHeight = !this.setHeight
-        };
-
-      }
+          },350);
+          this.setHeight1 = !this.setHeight1
+        }
+      },
+      pullDowning(){
+        this.none = !this.none
+      },
+    },
+    mounted(){
+      this.$nextTick(function() {})
     }
   };
 </script>
@@ -134,7 +151,6 @@
         .publicTop_center{
             height: 44px;
             margin-top: 2px;
-            line-height: 44px;
             border-radius: 22px;
             display: none;
             background: rgba(0,0,0,.2);
@@ -200,11 +216,18 @@
             flex: 99999;
         }
         .user{
-            float: right;
-            line-height: .5rem;
+            display: flex;
+            align-items: center;
+            line-height: 4rem;
             font-size: .12rem;
-            div{
-                display: inline-block;
+            button{
+                background: transparent;
+                border: 0;
+                padding: 0;
+                color: #fff;
+                outline: none;
+                align-items: center;
+                position: relative;
                 span::after{
                     content: "";
                     display: inline-block;
@@ -229,8 +252,7 @@
                 padding: 0 6px;
             }
             i{
-                position: relative;
-                top: 15px;
+                top: 0;
                 margin: 0 20px 0 10px;
                 background-position: -140px 0;
             }
@@ -241,10 +263,17 @@
                 position: relative;
                 top: 8px;
                 margin: 0 20px 0 0;
+                cursor: pointer;
                 &::after {
                     content: "\2630";
                 }
             }
+        }
+    }
+
+    @media (max-width: 767px) {
+        .publicTop .user i{
+            top: 9px;
         }
     }
 </style>

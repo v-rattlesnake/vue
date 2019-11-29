@@ -23,14 +23,15 @@
         width:'',
         zhuce:"",
         users:"",
-        sizeOnce:true
       }
     },
     methods:{
       drawLine(){
         // 基于准备好的dom，初始化echarts实例
-        this.zhuce = this.$echarts.init(document.getElementById('zhuce'),{width: this.width,})
-        this.users = this.$echarts.init(document.getElementById('users'))
+        this.zhuce = this.$echarts.init(document.getElementById('zhuce'),{width: this.width,});
+        this.users = this.$echarts.init(document.getElementById('users'));
+        store.commit("zhuceing",this.zhuce);
+        store.commit("usersing",this.users);
         // 绘制图表
         this.zhuce.hideLoading();
         let option = {
@@ -192,8 +193,7 @@
           };
         this.zhuce.setOption(option);
         this.users.setOption({
-          title: {
-            text: '用户数量 / 音乐数量（总数）',
+          title: { text: '用户数量 / 音乐数量（总数）',
             textStyle: {
               align: 'center',
               color: '#fff',
@@ -203,8 +203,7 @@
             left: '10%',
           },
           backgroundColor: '#0f375f',
-          tooltip: {
-            trigger : "axis",
+          tooltip: { trigger : "axis",
             axisPointer :{
               type:"cross",
               label:{
@@ -254,40 +253,17 @@
               }
             },
           },
-          series: [{
-            name: '数量',
+          series: [{ name: '数量',
             type: 'bar',
             data: [5, 15],
           }]
         });
       },
-      size(){
-        this.zhuce.resize();
-        this.users.resize();
-      },
-      inc(){
-        console.log(1);
-        store.commit("increment",true);
-        // this.sizeOnce = false
-      }
+
     },
     mounted(){
       this.$nextTick(function() {
         this.drawLine();
-        if (window.innerWidth < 768 && store.state.tang) {
-          store.commit("increment",false);
-          this.sizeOnce = true
-        };
-        window.onresize = (e) => {
-          if (e.target.innerWidth < 768 && store.state.tang){
-            store.commit("increment",false)
-          } else if (e.target.innerWidth >= 768 && !store.state.tang && this.sizeOnce) {
-            this.inc()
-          }
-          return (() => {
-            this.size();
-          })();
-        };
       })
     }
   };

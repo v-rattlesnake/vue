@@ -14,7 +14,7 @@
                         <span>*请输入歌曲名称</span>
                     </li>
                     <li>
-                        <div >
+                        <div>
                             <label for="zuozhe">作者</label>
                             <input id="zuozhe" type="text" placeholder="例：周杰伦">
                         </div>
@@ -41,9 +41,9 @@
                         </div>
                     </li>
                     <li>
-                        <div>
-                            <input type="reset" value="重置" class="btn btn-secondary">
-                            <input type="button" value="上传" class="btn btn_purple">
+                        <div class="btn">
+                            <btn class-number="3">重置</btn>
+                            <btn class-number="5">上传</btn>
                         </div>
                     </li>
                 </ul>
@@ -53,15 +53,20 @@
 </template>
 
 <script>
+  import btn from "./../components/AppComponents/btn";
+
   export default {
     name: "uploading",
+    components: {
+      btn
+    },
     data() {
       return {
         files: [],
-        imageUrl:"",
-        audioTitle:"拖拽或点击可上传<br/>暂只支持mp3",
-        audioUrl:"",
-        title:"暂未选择音频"
+        imageUrl: "",
+        audioTitle: "拖拽或点击可上传<br/>暂只支持mp3",
+        audioUrl: "",
+        title: "暂未选择音频"
       };
     },
     mounted() {
@@ -90,8 +95,8 @@
         e.preventDefault();
         var dt = e.dataTransfer;
         console.log(e);
-        console.log(e.target.className , dt.files[0].type.slice(0,5));
-        if (e.target.className !== dt.files[0].type.slice(0,5)) return;
+        console.log(e.target.className, dt.files[0].type.slice(0, 5));
+        if (e.target.className !== dt.files[0].type.slice(0, 5)) return;
         this.uploadFile(dt.files[0]);
 
       },
@@ -118,11 +123,11 @@
             fd.append("file", file);
 
             if (file.type.slice(0, 5) === "image") {
-              that.imageUrl = item.src
+              that.imageUrl = item.src;
             } else {
-              that.audioUrl = item.src
-              that.audioTitle = "点击试听"
-              that.title = ""
+              that.audioUrl = item.src;
+              that.audioTitle = "点击试听";
+              that.title = "";
             }
 
             console.log(fd.getAll("file"));
@@ -170,7 +175,7 @@
                 position: relative;
                 line-height: 30px;
                 margin: 20px 0;
-                > span{
+                > span {
                     position: absolute;
                     top: 0;
                     left: 102%;
@@ -180,10 +185,10 @@
                 div {
                     display: flex;
                     justify-content: space-between;
-                    label{
+                    label {
                         margin: 0;
                     }
-                    div{
+                    div {
                         width: 60%;
                         max-width: 300px;
                         min-height: 100px;
@@ -191,8 +196,8 @@
                         justify-content: center;
                         align-items: center;
                         position: relative;
-                        p{
-                            width:100%;
+                        p {
+                            width: 100%;
                             height: 100%;
                             display: flex;
                             justify-content: center;
@@ -202,14 +207,14 @@
                             position: absolute;
                             cursor: pointer;
                         }
-                        input,audio{
+                        input, audio {
                             position: absolute;
                             opacity: 0;
                             width: 100%;
                             height: 100%;
                             cursor: pointer;
                         }
-                        img{
+                        img {
                             position: relative;
                             width: 100%;
                         }
@@ -239,28 +244,39 @@
                             color: #aaa;
                         }
                     }
-                    .btn_purple{
-                        background: #ff6417;
-                        color: #fff;
-                        &:focus{
-                            box-shadow: 0 0 0 0.2rem rgba(255, 100, 23, 0.25);
-                        }
-                        &:hover{
-                            background: #f86017;
-                        }
-                    }
                 }
 
             }
         }
     }
+
     @media (max-width: 992px) {
-        .uploading .uploading_con li > span{
+        .uploading .uploading_con li > span {
             left: unset;
             right: 0;
             width: 60%;
             max-width: 300px;
             top: 25px;
+        }
+    }
+</style>
+
+<style lang="less">
+
+    .btn button {
+        line-height: 24px;
+        padding: 0 20px;
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(255, 100, 23, 0.25);
+        }
+        &:hover {
+            background: #f86017;
+        }
+        &:first-of-type{
+            color:#666
+        }
+        &:last-of-type{
+            color:#f86017
         }
     }
 </style>
