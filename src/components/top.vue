@@ -50,7 +50,10 @@
             "
           ></pull-down-list>
         </button>
-        <div class="user_bg d-md-inline-block d-none">
+        <div
+          class="user_bg d-md-inline-block d-none"
+          :style="'z-index:' + zIndexBg"
+        >
           <span class="" @click="bgFun">设置</span>
           <div
             class="user_bgPull"
@@ -314,7 +317,7 @@ export default {
       .user_bgPull {
         position: absolute;
         top: calc(100% + 7px);
-        width: 150px;
+        width: 151px;
         right: 0;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         color: #9ea7b3;

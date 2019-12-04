@@ -44,6 +44,7 @@ button {
   padding: 0;
   box-sizing: border-box;
   background: transparent;
+  cursor: pointer;
   &:focus {
     outline: none;
   }
