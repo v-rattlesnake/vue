@@ -12,19 +12,24 @@ const routes = [
   {
     path: "",
     redirect: "/home"
-  }, {
+  },
+  {
     path: "/Home",
     component: Home
-  }, {
+  },
+  {
     path: "/QQmusic",
     component: QQmusic
-  }, {
+  },
+  {
     path: "/weixin",
     component: weixin
-  }, {
+  },
+  {
     path: "/uploading",
     component: uploading
-  }, {
+  },
+  {
     path: "/user",
     component: user
   }

@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.users = user;
     },
     sizeOnceing(state, size) {
-      state.sizeOnce = size
+      state.sizeOnce = size;
     }
   },
   actions: {}

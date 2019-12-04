@@ -1,11 +1,11 @@
 import Vue from "vue";
-import axios from 'axios'
+import axios from "axios";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import vuescroll from 'vuescroll';
+import vuescroll from "vuescroll";
 
-import animate from 'animate.css'
+import animate from "animate.css";
 
 Vue.use(vuescroll, animate);
 
@@ -19,7 +19,6 @@ import "./assets/Reset.css";
 Vue.config.productionTip = false;
 Vue.prototype.$echarts = echarts;
 Vue.prototype.$axios = axios;
-
 
 new Vue({
   router,
