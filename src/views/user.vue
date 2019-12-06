@@ -1,5 +1,5 @@
 <template>
-  <div class="userC">
+  <div class="userC animated bounceInRight">
     <btn class-number="6">添加用户</btn>
     <btn class-number="7">删除用户</btn>
     <ul>
@@ -110,6 +110,10 @@ export default {
 
 <style scoped lang="less">
 .userC {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: #f5f5f5;
   padding: 0 1rem;
   .list_center {

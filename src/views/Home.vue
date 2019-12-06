@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid homeCon">
+  <div class="container-fluid homeCon animated bounceInRight">
     <div class="row">
       <div class="col-12 col-lg-6">
         <div ref="zhuce" id="zhuce" style="width:100%;height: 33rem;"></div>
@@ -271,7 +271,13 @@ export default {
 </script>
 
 <style scoped lang="less">
-.homeCon .col-12 {
-  margin-top: 15px;
+.homeCon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .col-12 {
+    margin-top: 15px;
+  }
 }
 </style>

@@ -3,8 +3,8 @@
     <div class="">
       <div class="log">
         <nav-log>
-          <template class="" v-slot:log="log"
-            >不归途
+          <template class="" v-slot:log="log">
+            不归途
           </template>
         </nav-log>
         <div class="d-md-block d-none" ref="log" @click="log">
@@ -28,34 +28,11 @@
       <div :class="{ scroll: $store.state.tang }">
         <div :class="{ menu: true, popup: !$store.state.tang }">
           <nav-lists>
-            <template v-slot:listTitle="listTitle"
-              >作品列表</template
-            >
+            <template v-slot:listTitle="listTitle">
+              作品列表
+            </template>
             <template v-slot:lists="lists">
-              <!--<a @click="collapse">-->
-              <!--<nav-list>-->
-              <!--<template v-slot:listIcon="listIcon"><i class="icon music"></i></template>-->
-              <!--<template v-slot:listNameBlock="listNameBlock">QQmusic</template>-->
-              <!--<template v-slot:listColl="listColl">-->
-              <!--<i :class="['collapse_icon',(collapse_?'':'collapse_iconPitch')]" v-if="$store.state.tang"></i>-->
-              <!--</template>-->
-              <!--</nav-list>-->
-              <!--</a>-->
-              <!--<div class="coll collapse">-->
-              <!--<router-link to="/QQmusic" active-class>-->
-              <!--<nav-list>-->
-              <!--<template v-slot:listIcon="listIcon"><i class="icon music"></i></template>-->
-              <!--<template v-slot:listNameBlock="listNameBlock">管理</template>-->
-              <!--</nav-list>-->
-              <!--</router-link>-->
-              <!--<router-link to="/uploading" active-class>-->
-              <!--<nav-list>-->
-              <!--<template v-slot:listIcon="listIcon"><i class="icon music"></i></template>-->
-              <!--<template v-slot:listNameBlock="listNameBlock">上传</template>-->
-              <!--</nav-list>-->
-              <!--</router-link>-->
-              <!--</div>-->
-              <animate-collapse>
+              <animate-collapse @colla="colla(1)">
                 <template v-slot:title>
                   <a href="javascript:;">
                     <nav-list>
@@ -78,36 +55,38 @@
                   </a>
                 </template>
                 <template v-slot:animateCon="animateCon">
-                  <router-link to="/QQmusic" active-class>
-                    <nav-list>
-                      <template v-slot:listIcon="listIcon">
-                        <i class="icon music"></i>
-                      </template>
-                      <template v-slot:listNameBlock="listNameBlock"
-                        >管理</template
-                      >
-                    </nav-list>
-                  </router-link>
-                  <router-link to="/uploading" active-class>
-                    <nav-list>
-                      <template v-slot:listIcon="listIcon">
-                        <i class="icon music"></i>
-                      </template>
-                      <template v-slot:listNameBlock="listNameBlock"
-                        >上传</template
-                      >
-                    </nav-list>
-                  </router-link>
+                  <div class="zicandan">
+                    <router-link to="/QQmusic" active-class>
+                      <nav-list>
+                        <template v-slot:listIcon="listIcon">
+                          <i class="icon music"></i>
+                        </template>
+                        <template v-slot:listNameBlock="listNameBlock">
+                          管理
+                        </template>
+                      </nav-list>
+                    </router-link>
+                    <router-link to="/uploading" active-class>
+                      <nav-list>
+                        <template v-slot:listIcon="listIcon">
+                          <i class="icon music"></i>
+                        </template>
+                        <template v-slot:listNameBlock="listNameBlock">
+                          上传
+                        </template>
+                      </nav-list>
+                    </router-link>
+                  </div>
                 </template>
               </animate-collapse>
               <router-link to="/weixin" active-class>
                 <nav-list>
-                  <template v-slot:listIcon="listIcon"
-                    ><i class="icon weixin"></i
-                  ></template>
-                  <template v-slot:listNameBlock="listNameBlock"
-                    >微信小程序</template
-                  >
+                  <template v-slot:listIcon="listIcon">
+                    <i class="icon weixin"></i>
+                  </template>
+                  <template v-slot:listNameBlock="listNameBlock">
+                    微信小程序
+                  </template>
                 </nav-list>
               </router-link>
             </template>
@@ -115,37 +94,20 @@
         </div>
         <div :class="{ menu: true, popup: !$store.state.tang }">
           <nav-lists>
-            <template v-slot:listTitle="listTitle"
-              >用户</template
-            >
+            <template v-slot:listTitle="listTitle">
+              用户
+            </template>
             <template v-slot:lists="lists">
-              <!--<a @click="collapse_1 = !collapse_1">-->
-              <!--<nav-list>-->
-              <!--<template v-slot:listIcon="listIcon"><i class="icon music"></i></template>-->
-              <!--<template v-slot:listNameBlock="listNameBlock">用户管理</template>-->
-              <!--<template v-slot:listColl="listColl">-->
-              <!--<i :class="['collapse_icon' ,(collapse_1?'':'collapse_iconPitch')]" v-if="$store.state.tang"></i>-->
-              <!--</template>-->
-              <!--</nav-list>-->
-              <!--</a>-->
-              <!--<div class="coll">-->
-              <!--<router-link to="/user" active-class>-->
-              <!--<nav-list>-->
-              <!--<template v-slot:listIcon="listIcon"><i class="icon music"></i></template>-->
-              <!--<template v-slot:listNameBlock="listNameBlock">用户权限</template>-->
-              <!--</nav-list>-->
-              <!--</router-link>-->
-              <!--</div>-->
-              <animate-collapse>
+              <animate-collapse @colla="colla(2)">
                 <template v-slot:title>
                   <a href="javascript:;">
                     <nav-list>
                       <template v-slot:listIcon="listIcon">
                         <i class="icon music"></i>
                       </template>
-                      <template v-slot:listNameBlock="listNameBlock"
-                        >用户管理</template
-                      >
+                      <template v-slot:listNameBlock="listNameBlock">
+                        用户管理
+                      </template>
                       <template v-slot:listColl="listColl">
                         <i
                           :class="[
@@ -159,16 +121,18 @@
                   </a>
                 </template>
                 <template v-slot:animateCon="animateCon">
-                  <router-link to="/user" active-class>
-                    <nav-list>
-                      <template v-slot:listIcon="listIcon"
-                        ><i class="icon music"></i
-                      ></template>
-                      <template v-slot:listNameBlock="listNameBlock"
-                        >用户权限</template
-                      >
-                    </nav-list>
-                  </router-link>
+                  <div>
+                    <router-link to="/user" active-class>
+                      <nav-list>
+                        <template v-slot:listIcon="listIcon">
+                          <i class="icon music"></i>
+                        </template>
+                        <template v-slot:listNameBlock="listNameBlock">
+                          用户权限
+                        </template>
+                      </nav-list>
+                    </router-link>
+                  </div>
                 </template>
               </animate-collapse>
             </template>
@@ -234,6 +198,13 @@ export default {
       if (!store.state.tang) {
         console.log(1);
         this.dark = "";
+      }
+    },
+    colla(e) {
+      if (e === 1) {
+        this.collapse_ = !this.collapse_;
+      } else if (e === 2) {
+        this.collapse_1 = !this.collapse_1;
       }
     }
   }
@@ -302,6 +273,7 @@ export default {
       margin-top: 13px;
       transition-duration: 0.3s;
       background: rgba(0, 0, 0, 0.2);
+      color: #fff;
       &::-webkit-input-placeholder {
         /* WebKit browsers */
         color: #d1d1d1;
@@ -352,6 +324,9 @@ export default {
       height: 45px;
       position: relative;
       vertical-align: top;
+    }
+    .zicandan {
+      background: rgba(0, 0, 0, 0.2);
     }
     .router-link-exact-active {
       background: rgba(0, 0, 0, 0.2);

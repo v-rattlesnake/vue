@@ -1,5 +1,5 @@
 <template>
-  <div class="qqMusic">
+  <div class="qqMusic animated bounceInRight">
     <btn class-number="9" :style-list="styleList">清空</btn>
     <btn class-number="8" :style-list="styleList">删除</btn>
     <ul>
@@ -141,6 +141,10 @@ export default {
 <style scoped lang="less">
 .qqMusic {
   padding: 0 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   ul {
     background: rgba(0, 0, 0, 0.05);
     li {

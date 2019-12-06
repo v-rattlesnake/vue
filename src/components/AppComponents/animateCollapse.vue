@@ -26,6 +26,7 @@ export default {
   methods: {
     collapse() {
       this.collapse_ = !this.collapse_;
+      this.$emit("colla");
     }
   }
 };

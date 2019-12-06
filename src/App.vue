@@ -37,9 +37,11 @@
         <content-t></content-t>
         <div class="scroll" :style="{ height: height }">
           <vue-scroll :ops="ops">
-            <keep-alive>
-              <router-view></router-view>
-            </keep-alive>
+            <transition>
+              <keep-alive>
+                <div class="routerView"><router-view></router-view></div>
+              </keep-alive>
+            </transition>
           </vue-scroll>
         </div>
       </div>
@@ -188,6 +190,9 @@ export default {
     z-index: -1;
     .scroll {
       background: #f5f5f5;
+      .routerView {
+        position: relative;
+      }
     }
     .dashboard {
       font-size: 0.14rem;

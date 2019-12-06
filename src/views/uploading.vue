@@ -1,5 +1,5 @@
 <template>
-  <div class="uploading row">
+  <div class="uploading row animated bounceInRight">
     <div class="uploading_con col-lg-6">
       <form>
         <ul>
@@ -19,13 +19,26 @@
           </li>
           <li>
             <div>
+              <span>歌词</span>
+              <div class="fileAudio">
+                <p
+                  :style="{ 'z-index': audioUrl.length }"
+                  v-html="audioTitle"
+                ></p>
+                <input class="audio" type="file" accept=".txt" :title="title" @change="audio"/>
+                <audio :src="audioUrl"></audio>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div>
               <span>音频</span>
               <div class="fileAudio">
                 <p
                   :style="{ 'z-index': audioUrl.length }"
                   v-html="audioTitle"
                 ></p>
-                <input class="audio" type="file" accept=".mp3" :title="title" />
+                <input class="audio" type="file" accept=".mp3" :title="title" @change="audio"/>
                 <audio :src="audioUrl"></audio>
               </div>
             </div>
@@ -34,12 +47,13 @@
             <div>
               <span>封面</span>
               <div class="fileImg">
-                <p>拖拽或点击可上传<br />暂只支持jpg、jpg、jpeg</p>
+                <p>拖拽或点击可上传<br />暂只支持png、jpg、jpeg</p>
                 <input
                   class="image"
                   type="file"
                   accept=".jpg, .jpeg, .png"
                   title="暂未选择图片"
+                  @change="img"
                 />
                 <img :src="imageUrl" alt="" />
               </div>
@@ -102,12 +116,39 @@ export default {
       console.log(e);
       console.log(e.target.className, dt.files[0].type.slice(0, 5));
       if (e.target.className !== dt.files[0].type.slice(0, 5)) return;
+      console.log(dt.files[0]);
       this.uploadFile(dt.files[0]);
     },
     dragleave(e) {
       e.stopPropagation();
       e.preventDefault();
       console.log("离开");
+    },
+    img(e) {
+      // const file = e.srcElement.files[0];
+      // const imgURL = window.URL.createObjectURL(file);
+      // this.imageUrl = imgURL;
+      //获取文件
+      var file = e.target.files[0];
+      this.uploadFile(file);
+      //创建读取文件的对象
+      // var reader = new FileReader();
+      //创建文件读取相关的变量
+      // var imgFile;
+      // reader.onload = e => {
+      //   console.log(e);
+      //   imgFile = e.target.result;
+      //   // console.log(imgFile);
+      //   this.imageUrl = imgFile;
+      // };
+      //正式读取文件
+      // reader.readAsDataURL(file);
+      e.target.value = "";
+    },
+    audio(e) {
+      var file = e.target.files[0];
+      this.uploadFile(file);
+      e.target.value = "";
     },
     uploadFile(file) {
       return new Promise((resolve, reject) => {
@@ -134,7 +175,7 @@ export default {
             that.title = "";
           }
 
-          console.log(fd.getAll("file"));
+          console.log(fd);
           // console.log(item);
           // var xhr = new XMLHttpRequest();
           // xhr.open("POST", "http://192.168.1.39:8080", true);
@@ -171,6 +212,10 @@ export default {
 .uploading {
   background: #f5f5f5;
   margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   .uploading_con {
     font-size: 14px;
     color: #758396;
