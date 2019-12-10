@@ -3,7 +3,9 @@
   <ul class="pullDownList" :style="styleZ" v-show="none">
     <slot name="extend">
       <li>
-        <slot name="a">简历</slot>
+        <router-link to="/resume">
+          <slot name="a">简历</slot>
+        </router-link>
       </li>
       <li>
         <slot name="b">退出</slot>
@@ -52,6 +54,9 @@ ul.pullDownList {
     border-bottom: 1px dashed currentColor;
     &:last-of-type {
       border: 0;
+    }
+    a {
+      width: 100%;
     }
   }
 }

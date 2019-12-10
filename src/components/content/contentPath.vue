@@ -1,10 +1,14 @@
 <template>
   <div class="con_path">
     <p>
-      <i class="icon"></i>
-      <span> &gt;</span>
+      <router-link to="/home">
+        <i class="icon"></i>
+      </router-link>
+      <span v-show="$store.state.url !== '/home'"> &gt;</span>
       <router-link :to="$store.state.url">
-        <span>&nbsp;{{ $store.state.name }} </span>
+        <span v-show="$store.state.url !== '/home'">
+          &nbsp;{{ $store.state.name }}
+        </span>
       </router-link>
     </p>
   </div>
@@ -12,7 +16,8 @@
 
 <script>
 export default {
-  name: "contentPath"
+  name: "contentPath",
+  methods: {}
 };
 </script>
 

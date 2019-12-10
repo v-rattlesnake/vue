@@ -20,13 +20,15 @@
           <li>
             <div>
               <span>歌词</span>
-              <div class="fileAudio">
-                <p
-                  :style="{ 'z-index': audioUrl.length }"
-                  v-html="audioTitle"
-                ></p>
-                <input class="audio" type="file" accept=".txt" :title="title" @change="audio"/>
-                <audio :src="audioUrl"></audio>
+              <div class="fileLyric">
+                <p :style="{ 'z-index': audioUrl.length }"></p>
+                <input
+                  class="lyric"
+                  type="file"
+                  accept=".txt"
+                  :title="title"
+                  @change="audio"
+                />
               </div>
             </div>
           </li>
@@ -38,7 +40,13 @@
                   :style="{ 'z-index': audioUrl.length }"
                   v-html="audioTitle"
                 ></p>
-                <input class="audio" type="file" accept=".mp3" :title="title" @change="audio"/>
+                <input
+                  class="audio"
+                  type="file"
+                  accept=".txt"
+                  :title="title"
+                  @change="audio"
+                />
                 <audio :src="audioUrl"></audio>
               </div>
             </div>
@@ -53,7 +61,7 @@
                   type="file"
                   accept=".jpg, .jpeg, .png"
                   title="暂未选择图片"
-                  @change="img"
+                  @change="audio"
                 />
                 <img :src="imageUrl" alt="" />
               </div>
@@ -91,6 +99,7 @@ export default {
   mounted() {
     let img = document.querySelector(".fileImg");
     let audio = document.querySelector(".fileAudio");
+    let lyric = document.querySelector(".fileLyric");
     img.addEventListener("dragenter", this.dragenter);
     img.addEventListener("dragover", this.dragenter);
     img.addEventListener("drop", this.drop);
@@ -99,6 +108,10 @@ export default {
     audio.addEventListener("dragover", this.dragenter);
     audio.addEventListener("drop", this.drop);
     audio.addEventListener("dragleave", this.dragleave);
+    lyric.addEventListener("dragenter", this.dragenter);
+    lyric.addEventListener("dragover", this.dragenter);
+    lyric.addEventListener("drop", this.drop);
+    lyric.addEventListener("dragleave", this.dragleave);
   },
   methods: {
     dragenter(e) {

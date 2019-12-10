@@ -1,24 +1,26 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home";
-import QQmusic from "./views/QQmusic";
-import weixin from "./views/weixin";
-import uploading from "./views/uploading";
-import user from "./views/user";
+import store from "./store";
+const Home = () => import("./views/Home");
+const QQmusic = () => import("./views/QQmusic");
+const weixin = () => import("./views/weixin");
+const uploading = () => import("./views/uploading");
+const user = () => import("./views/user");
+const resume = () => import("./views/resume");
 
 Vue.use(Router);
 
 const routes = [
   {
-    path: "",
+    path: "/",
     redirect: "/home"
   },
   {
-    path: "/Home",
+    path: "/home",
     component: Home
   },
   {
-    path: "/QQmusic",
+    path: "/qqmusic",
     component: QQmusic
   },
   {
@@ -32,14 +34,37 @@ const routes = [
   {
     path: "/user",
     component: user
+  },
+  {
+    path: "/resume",
+    component: resume
   }
 ];
 
-export default new Router({
+const route = new Router({
   routes,
   mode: "history"
 });
+export default route;
 
+route.beforeResolve((to, from, next) => {
+  console.log(to.path);
+  if (to.path === "/home") {
+    store.commit("nameing", { name: "总览", url: "/home" });
+  } else if (to.path === "/user") {
+    store.commit("nameing", { name: "用户", url: "/user" });
+  } else if (to.path === "/resume") {
+    store.commit("nameing", { name: "个人简历", url: "/resume" });
+  } else if (to.path === "/weixin") {
+    store.commit("nameing", { name: "微信小程序", url: "/weixin" });
+  } else if (to.path === "/qqmusic") {
+    store.commit("nameing", { name: "QQ音乐", url: "/qqmusic" });
+  } else if (to.path === "/uploading") {
+    store.commit("nameing", { name: "上传", url: "/uploading" });
+  }
+  window.document.title = store.state.name;
+  next();
+});
 // [
 //     {
 //       path: "/",

@@ -56,7 +56,7 @@
                 </template>
                 <template v-slot:animateCon="animateCon">
                   <div class="zicandan">
-                    <router-link to="/QQmusic" active-class>
+                    <router-link to="/qqmusic" active-class>
                       <nav-list>
                         <template v-slot:listIcon="listIcon">
                           <i class="icon music"></i>
@@ -175,7 +175,7 @@ export default {
   methods: {
     log() {
       // console.log(this.$parent.$children[3]);
-      console.log(router.app.$route.path);
+      console.log(router, router.app.$route);
       store.commit("increment", !store.state.tang);
       store.commit("sizeOnceing", !store.state.sizeOnce);
       if (router.app.$route.path === "/home") {

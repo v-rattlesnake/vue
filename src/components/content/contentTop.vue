@@ -41,6 +41,9 @@ export default {
   p {
     padding: 0;
     box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     &:first-of-type {
       padding-left: 60px;
       border-right: 1px dashed #ccc;
@@ -59,9 +62,6 @@ export default {
       vertical-align: top;
       width: 88%;
       max-width: 90%;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
       border: 0;
       padding: 0;
     }

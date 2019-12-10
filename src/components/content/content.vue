@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid content_con">
     <content-top>
-      <template v-slot:contentName
-        >总览</template
-      >
+      <template v-slot:contentName="contentName">
+        <span :title="$store.state.name">{{ $store.state.name }}</span>
+      </template>
       <template v-slot:contentNAN="contentNAN"></template>
     </content-top>
     <content-path></content-path>

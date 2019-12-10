@@ -13,6 +13,10 @@ export default new Vuex.Store({
     sizeOnce: false
   },
   mutations: {
+    nameing(state, objcet) {
+      state.name = objcet.name;
+      state.url = objcet.url;
+    },
     increment(state, bl) {
       // 变更状态
       state.tang = bl;
